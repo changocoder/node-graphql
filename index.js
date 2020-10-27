@@ -24,27 +24,27 @@ const schema = buildSchema(`
 let customers = [];
 let counter = 1;
 
-var root = {
+let root = {
   customers: () => {
     return customers;
   },
 
   customer: (data) => {
-    for (var i = 0; i < customers.length; i++)
+    for (let i = 0; i < customers.length; i++)
       if (customers[i].id == data.id) return customers[i];
 
     return null;
   },
 
   addCustomer: (data) => {
-    var customer = { id: counter, name: data.name, phone: data.phone };
+    let customer = { id: counter, name: data.name, phone: data.phone };
     customers.push(customer);
     counter++;
     return customer;
   },
 };
 
-var app = express();
+const app = express();
 app.use(
   "/graphql",
   graphqlHTTP({
